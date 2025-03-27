@@ -190,7 +190,7 @@ const Hero = () => {
         >
           <div className="flex items-center space-x-1 sm:space-x-2 text-gray-400 text-xs sm:text-sm">
             <Calendar className="w-[14px] sm:w-[16px] h-[14px] sm:h-[16px]" />
-            <span>28/03/2025</span>
+            <span>28/03/  2025</span>
           </div>
           <div className="flex items-center space-x-1 sm:space-x-2 text-gray-400 text-xs sm:text-sm">
             <Clock className="w-[14px] sm:w-[16px] h-[14px] sm:h-[16px]" />
@@ -491,8 +491,8 @@ const Production = () => {
       >
         <h3 className="text-lg sm:text-xl md:text-2xl text-red-500 mb-3 sm:mb-4" style={fonts.title}>Detrás de cámaras</h3>
         <p className="text-xs sm:text-sm md:text-base text-gray-300" style={fonts.body}>
-        La producción de "CRUEL" abarcó más de 6 meses de trabajo. El rodaje se realizó en solamente 3 intensas jornadas. Rodado en locaciones reales, utilizando técnicas innovadoras de iluminación y cinematografía para crear una atmósfera única que sumerge al espectador en una experiencia sensorial completa
-        Dejamos aquí el making off, muestra del buen ambiente y el equipazo que había en estas jornadas
+        La producción de "CRUEL" abarcó más de 6 meses de trabajo. El rodaje se realizó en solamente 3 intensas jornadas. Rodado en locaciones reales, utilizando técnicas innovadoras de iluminación y cinematografía para crear una atmósfera única que sumerge al espectador en una experiencia sensorial completa.
+        Dejamos aquí el making off, muestra del buen ambiente y el equipazo que había en estas jornadas.
         </p>
       </motion.div>
       <motion.div
