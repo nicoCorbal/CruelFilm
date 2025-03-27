@@ -146,6 +146,13 @@ const Hero = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.2 }}
         >
+          <img
+              src="/galeria/diow.png"
+              alt="Logo Dionysiacus"
+              className="mx-auto w-32 sm:w-40 md:w-48 mb-4"
+          />
+
+
           <h2 
             className="text-gray-400 mb-2 tracking-widest text-xs sm:text-sm" 
             style={fonts.body}
@@ -169,7 +176,7 @@ const Hero = () => {
             animate={{ opacity: 1 }}
             transition={{ duration: 1.5, delay: 0.6 }}
           >
-            La desesperación tiene un nuevo rostro
+            La historia de un suicidio
           </motion.p>
         </motion.div>
 
@@ -185,11 +192,11 @@ const Hero = () => {
           </div>
           <div className="flex items-center space-x-1 sm:space-x-2 text-gray-400 text-xs sm:text-sm">
             <Clock className="w-[14px] sm:w-[16px] h-[14px] sm:h-[16px]" />
-            <span>120 min</span>
+            <span>17:15 min</span>
           </div>
           <div className="flex items-center space-x-1 sm:space-x-2 text-gray-400 text-xs sm:text-sm">
             <User className="w-[14px] sm:w-[16px] h-[14px] sm:h-[16px]" />
-            <span>Drama/Horror</span>
+            <span>Drama Existencial</span>
           </div>
         </motion.div>
 
@@ -200,8 +207,15 @@ const Hero = () => {
           animate={{ opacity: 1 }}
           transition={{ duration: 1.5, delay: 1 }}
         >
-          En un mundo donde el dolor es la única certeza, tres almas perdidas enfrentan su último desafío. 
-          Una historia de desesperación, redención y el oscuro abrazo de lo inevitable.
+           <p>
+    Un joven apedreado por la vida y sin ganas de seguir tiene marcada una fecha en su calendario, el día de su muerte.
+  </p>
+  <p>
+    Retrato crudo y patético del último día de vida de Dante.
+  </p>
+  <p>
+    Representación de una de las situaciones más delicadas y complicadas en la sociedad de hoy en día, tratada con todo el respeto y seriedad.
+  </p>
         </motion.p>
         
         
@@ -258,7 +272,7 @@ const Trailer = () => {
             </div>
           </div>
           <img 
-            src="/trailer-thumbnail.jpg" 
+            src="/galeria/CRUEL_7.png" 
             alt="Trailer thumbnail"
             className="w-full h-full object-cover transition-transform group-hover:scale-105 duration-700"
           />
@@ -271,9 +285,7 @@ const Trailer = () => {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 1, delay: 0.3 }}
-        >
-          Experimenta un vistazo a la oscuridad que aguarda en "CRUEL"
-        </motion.p>
+        >        </motion.p>
       </div>
       
       {/* Trailer Modal */}
@@ -300,7 +312,7 @@ const Trailer = () => {
                 Cerrar ×
               </button>
               <iframe
-                src="https://www.youtube.com/embed/VIDEO_ID?autoplay=1"
+                src="https://www.youtube.com/embed/TZK2u1Bpsfk?si=ho86C9L9in_e5Jk4" title="YouTube video player" frameborder="0"
                 className="absolute inset-0 w-full h-full"
                 allowFullScreen
               ></iframe>
@@ -339,44 +351,34 @@ const Gallery = () => {
       }
     ]
   };
+  const galeriaImages = Array.from({ length: 24 }).map((_, i) => `galeria/${i + 1}.png`);
 
-  const imageDescriptions = [
-    "El protagonista enfrenta sus demonios internos en una escena cargada de tensión emocional.",
-    "Los límites entre la realidad y la ficción se desvanecen en esta impactante secuencia.",
-    "El clímax revela verdades ocultas que cambian todo lo que creíamos saber."
-  ];
 
   return (
     <Section title="Galería" id="galeria" className="bg-black">
       <div className="max-w-5xl mx-auto">
-        <Slider {...settings} className="overflow-hidden rounded-lg shadow-2xl shadow-red-900/30">
-          {["stock1.jpg", "stock2.jpg", "stock3.jpg"].map((img, index) => (
+        
+      <Slider {...settings} className="overflow-hidden rounded-lg shadow-2xl shadow-red-900/30">
+            {galeriaImages.map((img, index) => (
             <div key={index} className="relative">
-              <div className="w-full h-[400px] md:h-[600px] overflow-hidden">
-                <img
-                  src={`/${img}`}
-                  className="w-full h-full object-cover object-center"
-                  alt={`Escena ${index + 1}`}
-                />
-              </div>
-              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4 md:p-8">
-                <p className="text-white text-sm md:text-lg" style={fonts.body}>
-                  {imageDescriptions[index]}
-                </p>
-              </div>
+            <div className="w-full h-[400px] md:h-[600px] overflow-hidden">
+            <img
+          src={`/${img}`}
+          className="w-full h-full object-cover object-center"
+          alt={`Escena ${index + 1}`}
+        />
             </div>
-          ))}
-        </Slider>
+          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4 md:p-8">
+        <p className="text-white text-sm md:text-lg" style={fonts.body}>
+        </p>
+            </div>
+            </div>
+              ))}
+          </Slider>
+
         
         {/* Custom pagination indicator - mobile friendly */}
-        <div className="flex justify-center mt-4 md:mt-6 space-x-2">
-          {Array.from({ length: totalSlides }).map((_, index) => (
-            <button
-              key={index}
-              className={`h-1 transition-all duration-300 ${currentSlide === index ? 'w-8 md:w-12 bg-red-600' : 'w-4 md:w-6 bg-gray-700'}`}
-            />
-          ))}
-        </div>
+        
       </div>
     </Section>
   );
@@ -403,22 +405,23 @@ const CustomNextArrow = ({ onClick }) => (
 
 const Production = () => {
   const team = [
-    { name: "Marcos Ares", role: "Director", photo: "/director.jpg" },
-    { name: "Luis Outeiriño", role: "Director de Fotografía", photo: "/cinematographer.jpg" },
-    { name: "Pablo Oliveira", role: "Productor Ejecutivo", photo: "/producer.jpg" },
-    { name: "Óscar G. Calviño", role: "Director de Arte", photo: "/director.jpg" },
-    { name: "Roi Torres", role: "Ayudante de Cámara", photo: "/cinematographer.jpg" },
-    { name: "Candela Lorenzo", role: "Script", photo: "/producer.jpg" },
-    { name: "Noé Cárcamo", role: "Sonidista", photo: "/director.jpg" },
-    { name: "Hugo Fernández", role: "Making Off", photo: "/cinematographer.jpg" },
-    { name: "Sara López", role: "Directora de Prod.", photo: "/producer.jpg" },
-    { name: "Alejandro C. Oliveira", role: "Jefe de Prod.", photo: "/director.jpg" },
-    { name: "Fernando Andrés Mourinho", role: "Aux Producción 1", photo: "/cinematographer.jpg" },
-    { name: "Xulia Ferrradás", role: "Aux Producción 2", photo: "/producer.jpg" },
-    { name: "Manuel Debén", role: "Aux Producción 3", photo: "/director.jpg" },
-    { name: "José Miguel Villanueva", role: "Aux Producción 4", photo: "/cinematographer.jpg" },
-    { name: "Ariel Joshuá Egas", role: "Aux Producción 5", photo: "/producer.jpg" },
+    { name: "Marcos Ares", role: "Director", photo: "/equipo/MARCOS ARES.jpeg" },
+    { name: "Luis Outeiriño", role: "Director de Fotografía", photo: "/equipo/LUIS OUTEIRIÑO.jpeg" },
+    { name: "Pablo Oliveira", role: "Productor Ejecutivo", photo: "/equipo/PABLO OLIVEIRA.jpeg" },
+    { name: "Óscar G. Calviño", role: "Director de Arte", photo: "/equipo/ÓSCAR G.CALVIÑO.jpeg" },
+    { name: "Roi Torres", role: "Ayudante de Cámara", photo: "/equipo/ROI TORRES.jpeg" },
+    { name: "Candela Lorenzo", role: "Script", photo: "/equipo/CANDELA LORENZO.jpeg" },
+    { name: "Noé Cárcamo", role: "Sonidista", photo: "/equipo/noe.jpg" },
+    { name: "Hugo Fernández", role: "Making Off", photo: "/equipo/HUGO FERNÁNDEZ.jpeg" },
+    { name: "Sara López", role: "Directora de Prod.", photo: "/equipo/SARA LÓPEZ.jpeg" },
+    { name: "Alejandro C. Oliveira", role: "Jefe de Prod.", photo: "/equipo/ALEJANDRO CALVO.jpeg" },
+    { name: "Fernando Andrés Mourinho", role: "Aux Producción 1", photo: "/equipo/FERNANDO ANDRÉS MOURIÑO.jpeg" },
+    { name: "Xulia Ferrradás", role: "Aux Producción 2", photo: "/equipo/xulia.jpg" },
+    { name: "Manuel Debén", role: "Aux Producción 3", photo: "/equipo/MANUEL DEBÉN.jpeg" },
+    { name: "José Miguel Villanueva", role: "Aux Producción 4", photo: "/equipo/JOSÉ MIGUEL VILLANUEVA.jpeg" },
+    { name: "Ariel Joshuá Egas", role: "Aux Producción 5", photo: "/equipo/ARIEL JOSHUÁ.jpeg" },
   ];
+    const [showMakingOf, setShowMakingOf] = useState(false);
 
   return (
     <Section title="Producción" id="produccion">
@@ -430,8 +433,7 @@ const Production = () => {
         viewport={{ once: true }}
         transition={{ duration: 0.8 }}
       >
-        "CRUEL" fue realizado por un equipo apasionado de cineastas, con un enfoque en 
-        la cinematografía oscura y narrativa impactante que penetra en lo más profundo de la psique humana.
+        Equipo de estudiantes del CIFP A Farixa que ha hecho realidad este proyecto con su gran esfuerzo y dedicación.
       </motion.p>
       
       <motion.div 
@@ -477,6 +479,58 @@ const Production = () => {
           atmósfera única que sumerge al espectador en una experiencia sensorial completa.
         </p>
       </motion.div>
+      <motion.div
+  className="mt-8 md:mt-16 max-w-4xl mx-auto cursor-pointer group relative aspect-video rounded-lg overflow-hidden"
+  initial={{ opacity: 0, y: 30 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true }}
+  transition={{ duration: 0.8, delay: 0.4 }}
+  onClick={() => setShowMakingOf(true)}
+>
+  <img 
+    src="/galeria/CRUEL_4.png" 
+    alt="Miniatura Making Of"
+    className="w-full h-full object-cover transition-transform group-hover:scale-105 duration-700"
+  />
+  <div className="absolute inset-0 bg-black/60 group-hover:bg-black/40 transition-colors flex items-center justify-center z-10">
+    <div className="h-14 w-14 md:h-20 md:w-20 rounded-full bg-red-600/80 flex items-center justify-center">
+      <Play size={24} className="text-white ml-1" />
+    </div>
+  </div>
+</motion.div>
+<AnimatePresence>
+  {showMakingOf && (
+    <motion.div 
+      className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      onClick={() => setShowMakingOf(false)}
+    >
+      <motion.div
+        className="relative w-full max-w-5xl aspect-video"
+        initial={{ scale: 0.8, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        exit={{ scale: 0.8, opacity: 0 }}
+        transition={{ type: "spring", bounce: 0.2 }}
+      >
+        <button 
+          className="absolute -top-12 right-0 text-white hover:text-red-500 transition-colors"
+          onClick={() => setShowMakingOf(false)}
+        >
+          Cerrar ×
+        </button>
+        <iframe
+          src="https://www.youtube.com/embed/TU_ID_AQUI?autoplay=1"
+          className="absolute inset-0 w-full h-full"
+          allowFullScreen
+        ></iframe>
+      </motion.div>
+    </motion.div>
+  )}
+</AnimatePresence>
+
+
     </Section>
   );
 };
@@ -486,8 +540,6 @@ const Reparto = () => {
     { name: "Antonio praza", role: "Nacho", photo: "/cinematographer.jpg" },
     { name: "Concha", role: "Madre de Dante", photo: "/producer.jpg" },
     { name: "Alejandra Quijano", role: "Chica ", photo: "/director.jpg" },
-    { name: "Roi Torres", role: "Ayudante de Cámara", photo: "/cinematographer.jpg" },
-    { name: "Candela Lorenzo", role: "Script", photo: "/producer.jpg" },
   ];
 
   return (
@@ -500,8 +552,6 @@ const Reparto = () => {
         viewport={{ once: true }}
         transition={{ duration: 0.8 }}
       >
-        "CRUEL" fue realizado por un equipo apasionado de cineastas, con un enfoque en 
-        la cinematografía oscura y narrativa impactante que penetra en lo más profundo de la psique humana.
       </motion.p>
       
       <motion.div 
@@ -533,20 +583,6 @@ const Reparto = () => {
         ))}
       </motion.div>
       
-      <motion.div 
-        className="mt-8 md:mt-16 bg-black/50 p-4 sm:p-6 md:p-8 mx-4 rounded-lg border border-red-900/30"
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8, delay: 0.4 }}
-      >
-        <h3 className="text-lg sm:text-xl md:text-2xl text-red-500 mb-3 sm:mb-4" style={fonts.title}>Detrás de cámaras</h3>
-        <p className="text-xs sm:text-sm md:text-base text-gray-300" style={fonts.body}>
-          La producción de "CRUEL" abarcó más de 8 meses de rodaje en locaciones reales, 
-          utilizando técnicas innovadoras de iluminación y cinematografía para crear una 
-          atmósfera única que sumerge al espectador en una experiencia sensorial completa.
-        </p>
-      </motion.div>
     </Section>
   );
 };
@@ -563,6 +599,11 @@ const Contact = () => {
         transition={{ duration: 0.8 }}
         className="max-w-2xl mx-auto space-y-8"
       >
+        <div className="pt-8 border-t border-red-900/30">
+          <p className="text-center text-sm sm:text-base text-gray-300 leading-relaxed max-w-xl mx-auto" style={fonts.body}>
+          Cortometraje de ficción con el objetivo de poner foco a la depresión y el suicidio
+          Realizado por estudiantes del 2o Grado del Ciclo Superior de Producción de Audiovisuales y Espectáculos del CIFP A Farixa, Ourense          </p>
+        </div>
         <div>
           <h3 className="text-xl md:text-2xl text-red-500 mb-4 text-center" style={fonts.title}>Síguenos</h3>
           <div className="flex justify-center space-x-6">
@@ -571,12 +612,7 @@ const Contact = () => {
                 <span className="text-2xl">📸</span>
               </div>
             </a>
-            <a href="https://twitter.com" className="text-gray-400 hover:text-red-500 transition-colors">
-              <div className="w-12 h-12 rounded-full border border-gray-700 flex items-center justify-center hover:border-red-500 transition-colors">
-                <span className="text-2xl">🐦</span>
-              </div>
-            </a>
-            <a href="https://youtube.com" className="text-gray-400 hover:text-red-500 transition-colors">
+            <a href="https://www.youtube.com/@DionysiacusProductions" className="text-gray-400 hover:text-red-500 transition-colors">
               <div className="w-12 h-12 rounded-full border border-gray-700 flex items-center justify-center hover:border-red-500 transition-colors">
                 <span className="text-2xl">📺</span>
               </div>
@@ -589,11 +625,7 @@ const Contact = () => {
           <ul className="space-y-4 text-gray-300 max-w-md mx-auto" style={fonts.body}>
             <li className="flex items-start space-x-4 justify-center">
               <span className="text-red-500">📧</span>
-              <span>info@cruelfilm.com</span>
-            </li>
-            <li className="flex items-start space-x-4 justify-center">
-              <span className="text-red-500">📞</span>
-              <span>+34 555 123 456</span>
+              <span>dionysiacusproductions@gmail.com</span>
             </li>
             <li className="flex items-start space-x-4 justify-center">
               <span className="text-red-500">📍</span>
@@ -602,16 +634,7 @@ const Contact = () => {
           </ul>
         </div>
         
-        <div>
-          <h3 className="text-xl md:text-2xl text-red-500 mb-4 text-center" style={fonts.title}>Festivales</h3>
-          <div className="flex flex-wrap justify-center gap-3">
-            {["Festival de Sitges", "Nocturna Madrid", "BIFFF"].map((festival) => (
-              <span key={festival} className="bg-gray-800 text-xs md:text-sm text-gray-300 px-3 py-1 rounded-full border border-gray-700">
-                {festival}
-              </span>
-            ))}
-          </div>
-        </div>
+        
       </motion.div>
     </Section>
   );
@@ -622,10 +645,11 @@ const Footer = () => (
   <footer className="bg-black text-gray-400 py-8 md:py-12 border-t border-red-900/30">
     <div className="container mx-auto px-4 md:px-6">
       <div className="flex flex-col md:flex-row justify-between items-center">
-        <div className="mb-6 md:mb-0">
-          <h2 className="text-2xl md:text-3xl text-red-600" style={fonts.title}>CRUEL</h2>
-          <p className="text-xs md:text-sm mt-2" style={fonts.body}>© 2025 Todos los derechos reservados</p>
-        </div>
+      <div className="mb-6 md:mb-0 text-center md:text-left w-full md:w-auto">
+        <h2 className="text-2xl md:text-3xl text-red-600" style={fonts.title}>CRUEL</h2>
+        <p className="text-xs md:text-sm mt-2" style={fonts.body}>© 2025 Todos los derechos reservados</p>
+      </div>
+
         
         <div className="flex flex-wrap justify-center gap-3 md:gap-6">
           <button onClick={() => document.getElementById('inicio').scrollIntoView({ behavior: 'smooth' })} className="text-gray-400 hover:text-red-500 transition-colors text-sm">Inicio</button>
@@ -637,12 +661,6 @@ const Footer = () => (
       </div>
       
       <div className="mt-6 md:mt-8 pt-6 md:pt-8 border-t border-gray-800 text-xs md:text-sm text-center" style={fonts.body}>
-        <p>Diseñado con pasión por el cine de terror.</p>
-        <p className="mt-2">
-          <a href="#" className="text-gray-400 hover:text-red-500 transition-colors mx-2">Política de Privacidad</a>
-          <a href="#" className="text-gray-400 hover:text-red-500 transition-colors mx-2">Términos de Uso</a>
-          <a href="#" className="text-gray-400 hover:text-red-500 transition-colors mx-2">Cookies</a>
-        </p>
       </div>
     </div>
   </footer>
