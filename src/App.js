@@ -195,7 +195,7 @@ const Hero = () => {
 
         <motion.p
           className="text-sm sm:text-base md:text-lg text-gray-300 mt-6 sm:mt-8 italic leading-relaxed max-w-xl mx-auto"
-          style={fonts.body}
+          style={fonts.body}  
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1.5, delay: 1 }}
