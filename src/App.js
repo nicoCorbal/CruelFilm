@@ -4,7 +4,8 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { ChevronLeft, ChevronRight, Play, Calendar, User, Clock } from "lucide-react";
-import SuicideCounter from "./components/Contdaor";
+<link rel="icon" type="image/png" href="/favicon.png" />
+
 
 // Modern font pairings - maintaining gothic theme but with better typography
 const fonts = {
@@ -324,11 +325,10 @@ const Trailer = () => {
   );
 };
 
-// Enhanced Gallery with better arrows and transition effects
 const Gallery = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const totalSlides = 3;
-  
+  const totalSlides = 24;
+
   const settings = {
     dots: false,
     arrows: true,
@@ -351,34 +351,50 @@ const Gallery = () => {
       }
     ]
   };
-  const galeriaImages = Array.from({ length: 24 }).map((_, i) => `galeria/${i + 1}.png`);
 
+  const galeriaImages = Array.from({ length: 24 }).map((_, i) => `galeria/${i + 1}.png`);
 
   return (
     <Section title="Galería" id="galeria" className="bg-black">
       <div className="max-w-5xl mx-auto">
-        
-      <Slider {...settings} className="overflow-hidden rounded-lg shadow-2xl shadow-red-900/30">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1 }}
+          className="my-6 sm:my-10"
+        >
+          <Slider {...settings} className="overflow-hidden rounded-lg shadow-2xl shadow-red-900/30">
             {galeriaImages.map((img, index) => (
-            <div key={index} className="relative">
-            <div className="w-full h-[400px] md:h-[600px] overflow-hidden">
-            <img
-          src={`/${img}`}
-          className="w-full h-full object-cover object-center"
-          alt={`Escena ${index + 1}`}
-        />
-            </div>
-          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4 md:p-8">
-        <p className="text-white text-sm md:text-lg" style={fonts.body}>
-        </p>
-            </div>
-            </div>
-              ))}
+              <div key={index} className="relative">
+                <div className="w-full h-[300px] sm:h-[400px] md:h-[600px] overflow-hidden">
+                  <img
+                    src={`/${img}`}
+                    className="w-full h-full object-cover object-center"
+                    alt={`Escena ${index + 1}`}
+                  />
+                </div>
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-2 sm:p-4 md:p-6">
+                  <p className="text-white text-xs sm:text-sm md:text-base lg:text-lg leading-snug" style={fonts.body}>
+                    {/* Caption opcional si lo necesitas */}
+                  </p>
+                </div>
+              </div>
+            ))}
           </Slider>
+        </motion.div>
 
-        
-        {/* Custom pagination indicator - mobile friendly */}
-        
+        {/* Mobile Progress Dots */}
+<div className="flex justify-center mt-4 space-x-1 md:hidden">
+  {Array.from({ length: totalSlides }).map((_, index) => (
+    <span
+      key={index}
+      className={`h-1 rounded-full transition-all duration-300 ${
+        currentSlide === index ? 'w-8 bg-red-600' : 'w-2 bg-gray-700'
+      }`}
+    />
+  ))}
+</div>
       </div>
     </Section>
   );
@@ -474,9 +490,8 @@ const Production = () => {
       >
         <h3 className="text-lg sm:text-xl md:text-2xl text-red-500 mb-3 sm:mb-4" style={fonts.title}>Detrás de cámaras</h3>
         <p className="text-xs sm:text-sm md:text-base text-gray-300" style={fonts.body}>
-          La producción de "CRUEL" abarcó más de 8 meses de rodaje en locaciones reales, 
-          utilizando técnicas innovadoras de iluminación y cinematografía para crear una 
-          atmósfera única que sumerge al espectador en una experiencia sensorial completa.
+        La producción de "CRUEL" abarcó más de 6 meses de trabajo. El rodaje se realizó en solamente 3 intensas jornadas. Rodado en locaciones reales, utilizando técnicas innovadoras de iluminación y cinematografía para crear una atmósfera única que sumerge al espectador en una experiencia sensorial completa
+        Dejamos aquí el making off, muestra del buen ambiente y el equipazo que había en estas jornadas
         </p>
       </motion.div>
       <motion.div
@@ -536,10 +551,10 @@ const Production = () => {
 };
 const Reparto = () => {
   const team = [
-    { name: "Martin Álvarez", role: "Dante", photo: "/director.jpg" },
-    { name: "Antonio praza", role: "Nacho", photo: "/cinematographer.jpg" },
-    { name: "Concha", role: "Madre de Dante", photo: "/producer.jpg" },
-    { name: "Alejandra Quijano", role: "Chica ", photo: "/director.jpg" },
+    { name: "Martin Álvarez", role: "Dante", photo: "/equipo/1.jpg" },
+    { name: "Antonio praza", role: "Nacho", photo: "/equipo/2.jpg" },
+    { name: "Concha", role: "Madre de Dante", photo: "/equipo/3.jpg" },
+    { name: "Alejandra Quijano", role: "Chica ", photo: "/equipo/4.jpg" },
   ];
 
   return (
@@ -634,7 +649,14 @@ const Contact = () => {
           </ul>
         </div>
         
-        
+        <div className="pt-10 border-t border-red-900/30 flex justify-center">
+        <img
+            src="/galeria/farixa.png"
+           alt="CIFP A Farixa - Xunta de Galicia"
+            className="w-64 sm:w-72 md:w-80 object-contain"
+          />
+          </div>
+
       </motion.div>
     </Section>
   );
