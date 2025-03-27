@@ -83,6 +83,7 @@ const Header = () => {
               { name: "Galería", id: "galeria" },
               { name: "Producción", id: "produccion" },
               { name: "Reparto", id: "reparto" },
+              
               { name: "Contacto", id: "contacto" }
             ].map((item) => (
               <li key={item.name}>
@@ -189,7 +190,7 @@ const Hero = () => {
         >
           <div className="flex items-center space-x-1 sm:space-x-2 text-gray-400 text-xs sm:text-sm">
             <Calendar className="w-[14px] sm:w-[16px] h-[14px] sm:h-[16px]" />
-            <span>2025</span>
+            <span>28/03/2025</span>
           </div>
           <div className="flex items-center space-x-1 sm:space-x-2 text-gray-400 text-xs sm:text-sm">
             <Clock className="w-[14px] sm:w-[16px] h-[14px] sm:h-[16px]" />
@@ -536,7 +537,7 @@ const Production = () => {
           Cerrar ×
         </button>
         <iframe
-          src="https://www.youtube.com/embed/TU_ID_AQUI?autoplay=1"
+          src="https://www.youtube.com/embed/4ZDg-uD68lg?si=OvpoHAufQg-zLK5z" title="YouTube video player" frameborder="0"
           className="absolute inset-0 w-full h-full"
           allowFullScreen
         ></iframe>
@@ -598,6 +599,99 @@ const Reparto = () => {
         ))}
       </motion.div>
       
+    </Section>
+  );
+};
+
+
+
+const Entrevistas = () => {
+  const [selectedVideo, setSelectedVideo] = useState(null);
+  
+  const entrevistasData = [
+    {
+      title: "Marcos Ares - Director",
+      subtitle: "Entrevistas con Telemiño",
+      videoId: "FTeoz0ODOQM",  
+      thumbnail: "/galeria/CRUEL_3.png",
+    },
+    
+    
+  ];
+
+  return (
+    <Section title="Entrevistas" id="entrevistas">
+      <motion.p 
+        className="text-base md:text-xl text-center max-w-3xl mx-auto text-gray-300 px-4 mb-10"
+        style={fonts.body}
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8 }}
+      >
+      </motion.p>
+
+      <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto px-4">
+        {entrevistasData.map((item, index) => (
+          <motion.div 
+            key={index}
+            className="group relative cursor-pointer rounded-lg overflow-hidden aspect-video shadow-lg"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: index * 0.2 }}
+            onClick={() => setSelectedVideo(item.videoId)}
+          >
+            <img
+              src={item.thumbnail}
+              alt={item.title}
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+            />
+            <div className="absolute inset-0 bg-black/60 group-hover:bg-black/40 transition-colors flex items-center justify-center z-10">
+              <div className="h-12 w-12 md:h-14 md:w-14 rounded-full bg-red-600/80 flex items-center justify-center">
+                <Play size={22} className="text-white ml-1" />
+              </div>
+            </div>
+            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4 text-white z-10">
+              <h3 className="text-sm sm:text-base md:text-lg font-bold" style={fonts.title}>{item.title}</h3>
+              <p className="text-xs sm:text-sm" style={fonts.body}>{item.subtitle}</p>
+            </div>
+          </motion.div>
+        ))}
+      </div>
+
+      {/* Modal para reproducir */}
+      <AnimatePresence>
+        {selectedVideo && (
+          <motion.div 
+            className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setSelectedVideo(null)}
+          >
+            <motion.div
+              className="relative w-full max-w-5xl aspect-video"
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.8, opacity: 0 }}
+              transition={{ type: "spring", bounce: 0.2 }}
+            >
+              <button 
+                className="absolute -top-12 right-0 text-white hover:text-red-500 transition-colors"
+                onClick={() => setSelectedVideo(null)}
+              >
+                Cerrar ×
+              </button>
+              <iframe
+                src={`https://www.youtube.com/embed/${selectedVideo}?autoplay=1`}
+                className="absolute inset-0 w-full h-full"
+                allowFullScreen
+              ></iframe>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </Section>
   );
 };
@@ -674,7 +768,6 @@ const Footer = () => (
 
         
         <div className="flex flex-wrap justify-center gap-3 md:gap-6">
-          <button onClick={() => document.getElementById('inicio').scrollIntoView({ behavior: 'smooth' })} className="text-gray-400 hover:text-red-500 transition-colors text-sm">Inicio</button>
           <button onClick={() => document.getElementById('trailer').scrollIntoView({ behavior: 'smooth' })} className="text-gray-400 hover:text-red-500 transition-colors text-sm">Tráiler</button>
           <button onClick={() => document.getElementById('galeria').scrollIntoView({ behavior: 'smooth' })} className="text-gray-400 hover:text-red-500 transition-colors text-sm">Galería</button>
           <button onClick={() => document.getElementById('produccion').scrollIntoView({ behavior: 'smooth' })} className="text-gray-400 hover:text-red-500 transition-colors text-sm">Producción</button>
@@ -699,6 +792,7 @@ const App = () => {
         <Gallery />
         <Production />
         <Reparto />
+        <Entrevistas />
         <Contact />
       </main>
       <Footer />
