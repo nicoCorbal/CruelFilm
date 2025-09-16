@@ -44,7 +44,7 @@ const Header = () => {
       setScrolled(window.scrollY > heroHeight + 50);
       
       // Detect active section
-      const sections = ['inicio', 'trailer', 'galeria', 'produccion', 'reparto', 'contacto'];
+      const sections = ['inicio', 'trailer', 'galeria', 'produccion', 'reparto', 'entrevistas', 'prensa', 'contacto'];
       for (let section of sections) {
         const element = document.getElementById(section);
         if (element) {
@@ -76,6 +76,8 @@ const Header = () => {
     { name: "Galería", id: "galeria", icon: <Camera size={18} /> },
     { name: "Producción", id: "produccion", icon: <Users size={18} /> },
     { name: "Reparto", id: "reparto", icon: <Star size={18} /> },
+    { name: "Entrevistas", id: "entrevistas", icon: <Youtube size={18} /> },
+    { name: "Prensa", id: "prensa", icon: <Calendar size={18} /> },
     { name: "Contacto", id: "contacto", icon: <Mail size={18} /> }
   ];
 
@@ -785,6 +787,7 @@ const Reparto = () => {
 // Interviews Section
 const Entrevistas = () => {
   const [selectedVideo, setSelectedVideo] = useState(null);
+  const [selectedStart, setSelectedStart] = useState(null);
   
   const interviews = [
     {
@@ -792,7 +795,16 @@ const Entrevistas = () => {
       subtitle: "Director - Entrevista con Telemiño",
       videoId: "FTeoz0ODOQM",
       thumbnail: "/galeria/CRUEL_3.png",
-      duration: "12:45"
+      duration: "12:45",
+      startSeconds: 0
+    },
+    {
+      title: "CINEPHILIA 09.04.25",
+      subtitle: "Entrevista – empieza en 4:08",
+      videoId: "PdjT5Hjs0gU",
+      thumbnail: "/galeria/CRUEL_6.png",
+      duration: "",
+      startSeconds: 248
     }
   ];
 
@@ -807,7 +819,7 @@ const Entrevistas = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: index * 0.2 }}
-            onClick={() => setSelectedVideo(item.videoId)}
+            onClick={() => { setSelectedVideo(item.videoId); setSelectedStart(item.startSeconds || 0); }}
           >
             <div className="relative aspect-video rounded-2xl overflow-hidden glass-dark">
               <img
@@ -831,9 +843,11 @@ const Entrevistas = () => {
               </div>
               
               {/* Duration Badge */}
-              <div className="absolute top-4 right-4 glass px-3 py-1 rounded-full">
-                <span className="text-white text-xs font-medium">{item.duration}</span>
-              </div>
+              {item.duration ? (
+                <div className="absolute top-4 right-4 glass px-3 py-1 rounded-full">
+                  <span className="text-white text-xs font-medium">{item.duration}</span>
+                </div>
+              ) : null}
               
               {/* Info */}
               <div className="absolute bottom-0 left-0 right-0 p-6">
@@ -855,7 +869,7 @@ const Entrevistas = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            onClick={() => setSelectedVideo(null)}
+            onClick={() => { setSelectedVideo(null); setSelectedStart(null); }}
           >
             <motion.div
               className="relative w-full max-w-6xl aspect-video"
@@ -867,13 +881,13 @@ const Entrevistas = () => {
             >
               <button 
                 className="absolute -top-14 right-0 text-white hover:text-red-500 transition-colors flex items-center space-x-2"
-                onClick={() => setSelectedVideo(null)}
+                onClick={() => { setSelectedVideo(null); setSelectedStart(null); }}
               >
                 <span style={fonts.body}>Cerrar</span>
                 <X size={24} />
               </button>
               <iframe
-                src={`https://www.youtube.com/embed/${selectedVideo}?autoplay=1`}
+                src={`https://www.youtube.com/embed/${selectedVideo}?autoplay=1${selectedStart ? `&start=${selectedStart}` : ''}`}
                 title="Entrevista CRUEL"
                 frameBorder="0"
                 className="w-full h-full rounded-2xl"
@@ -884,6 +898,57 @@ const Entrevistas = () => {
           </motion.div>
         )}
       </AnimatePresence>
+    </Section>
+  );
+};
+
+// Press Section
+const Prensa = () => {
+  const pressItems = [
+    {
+      title: "Telexornal Galicia 10-09-2025 (RTVE)",
+      subtitle: "La noticia empieza en el 18:55",
+      url: "https://www.rtve.es/play/videos/telexornal-galicia/telexornal-galicia-10-09-2025/16724193/",
+      thumbnail: "/galeria/CRUEL_7.png"
+    },
+    {
+      title: "El CHUO forma a sus profesionales en la prevención del suicidio",
+      subtitle: "La Voz de Galicia",
+      url: "https://www.lavozdegalicia.es/amp/noticia/ourense/2025/09/09/chuo-forma-profesionales-prevencion-suicidio/00031754741190268731625.htm",
+      thumbnail: "/galeria/poster.png"
+    }
+  ];
+
+  return (
+    <Section title="Prensa" id="prensa" dark>
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        {pressItems.map((item, index) => (
+          <motion.a
+            key={index}
+            href={item.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group relative block"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: index * 0.1 }}
+          >
+            <div className="relative aspect-video rounded-2xl overflow-hidden glass-dark">
+              <img
+                src={item.thumbnail}
+                alt={item.title}
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              />
+              <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors"></div>
+              <div className="absolute bottom-0 left-0 right-0 p-6">
+                <h3 className="text-lg font-bold text-white mb-1" style={fonts.subtitle}>{item.title}</h3>
+                <p className="text-gray-300 text-sm" style={fonts.body}>{item.subtitle}</p>
+              </div>
+            </div>
+          </motion.a>
+        ))}
+      </div>
     </Section>
   );
 };
@@ -1000,7 +1065,7 @@ const Footer = () => {
   };
   
   const footerLinks = [
-    { title: 'Navegación', items: ['Inicio', 'Tráiler', 'Galería', 'Producción', 'Reparto'] },
+    { title: 'Navegación', items: ['Inicio', 'Tráiler', 'Galería', 'Producción', 'Reparto', 'Entrevistas', 'Prensa'] },
     { title: 'Información', items: ['Sobre Nosotros', 'Prensa', 'Contacto'] },
     { title: 'Legal', items: ['Términos', 'Privacidad', 'Cookies', 'Copyright'] }
   ];
@@ -1220,6 +1285,7 @@ const App = () => {
         <Production />
         <Reparto />
         <Entrevistas />
+        <Prensa />
         <Contact />
       </main>
       <Footer />
